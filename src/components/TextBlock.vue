@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
+const { fetchVoice } = useSpeech();
+const props = defineProps({
+  content: {
+    type: String,
+    default: "",
+  },
+  mounted:{
+    type: Boolean,
+    default: false,
+  }
+});
 const md = MarkdownIt({
   html: true,
   linkify: true,
@@ -20,17 +31,15 @@ const md = MarkdownIt({
     );
   },
 });
-
-const props = defineProps({
-  content: {
-    type: String,
-    default: "",
-  },
+onMounted(async () => {
+  if (!props.mounted) return;
+  await fetchVoice(props.content);
 });
+
 </script>
 <template>
   <div
-    class="markdown-body bg-gray-400 rounded sh"
+    class="markdown-body bg-gray-400 rounded sh max-w-2xl text-xs"
     v-html="md.render(props.content)"
   ></div>
 </template>

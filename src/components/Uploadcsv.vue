@@ -31,7 +31,7 @@ const uploadFiles = async () => {
     method: "POST",
     body: formData,
   });
-	console.log(unref(data))
+  console.log(unref(data));
   dataviz.value = unref(data) as DataVisualization;
 };
 
@@ -75,5 +75,5 @@ const handleClick = () => {
       </div>
     </section>
   </div>
-<DataViz v-if="dataviz" :dataviz="dataviz" />
+  <DataViz v-if="dataviz" :dataviz="dataviz" />
 </template>

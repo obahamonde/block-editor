@@ -82,7 +82,7 @@ const handleSend = (text: string) => {
 </script>
 
 <template>
-  <div class="chat-wrapper w-144">
+  <div class="chat-wrapper max-w-168 mix-w-96">
     <div class="message-wrapper">
       <div class="chat-wrapper">
         <ServerEvent

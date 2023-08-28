@@ -9,9 +9,21 @@ export const useSpeech = () => {
   speech.recognition!.grammars = speechRecognitionList;
   const { isListening, result } = speech;
 
+  const fetchVoice = async (text: string) => {
+    const { data: response } = await useFetch(`/api/audio/${text}`, {
+      method: "GET",
+    }).blob();
+    if (!response.value) return;
+    const blobAudio = new Blob([response.value], { type: "audio/mp3" });
+    const audioUrl = URL.createObjectURL(blobAudio);
+    const audio = new Audio(audioUrl);
+    audio.play()
+  };
+
   return {
     isListening,
     result,
     speech,
+    fetchVoice,
   };
 };

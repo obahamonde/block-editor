@@ -80,3 +80,8 @@ export type Block = {
 export const BlockMapping: Record<string, Component> = {
   TextBlock: blocks.TextBlock,
 };
+
+export type FunctionCall = {
+  name: string;
+  data: any;
+};

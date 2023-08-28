@@ -16,14 +16,5 @@ const props = defineProps<{
     <div class="app-main">
       <ChatContainer :user="props.user" :namespace="currentNamespace" />
     </div>
-    <div class="app-right mt-16">
-      <div class="b-2 b-blue rounded my-2">
-        <UploadZone :user="props.user" />
-      </div>
-      <div class="app-activity-box">
-        <Stats />
-        <ActivityInfo />
-      </div>
-    </div>
   </div>
 </template>

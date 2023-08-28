@@ -7,7 +7,6 @@ import App from "./App.vue";
 import generatedRoutes from "~pages";
 import { createAuth0 } from "@auth0/auth0-vue";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
-import "@unocss/reset/tailwind.css";
 import "./styles/main.scss";
 import "uno.css";
 

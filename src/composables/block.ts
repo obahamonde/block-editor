@@ -1,4 +1,4 @@
-import { BlockType, Detail, Block, Page } from "~/types";
+import { Block } from "~/types";
 
 export const useBlock = () => {
   const blocks = ref<Block[]>([]);

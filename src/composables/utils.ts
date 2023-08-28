@@ -15,19 +15,18 @@ export const useUtils = () => {
   };
 
   const useColor = () => {
-    const chars = '0123456789ABCDEF';
-    let color = '#';
+    const chars = "0123456789ABCDEF";
+    let color = "#";
     for (let i = 0; i < 6; i++) {
       color += chars[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
-
+  };
 
   return {
     useTypeWriter,
     useCopy,
     usePlay,
-    useColor
+    useColor,
   };
 };

@@ -14,17 +14,24 @@ import { WebrtcProvider } from "y-webrtc";
 const props = defineProps<{
   user: User;
 }>();
-const { useColor } = useUtils()
+const { useColor } = useUtils();
 const ydoc = new Y.Doc();
 const provider = new WebrtcProvider("block-editor", ydoc);
 const editor: ShallowRef<Editor | undefined> = useEditor({
   extensions: [
     StarterKit,
     Link.configure({ openOnClick: true }),
-    Image.configure({ openOnClick: true }),
-    TaskItem.configure({ openOnClick: true }),
+    Image.configure(),
+    TaskItem.configure({ nested: true }),
     Collaboration.configure({ document: ydoc }),
-    CollaborationCursor.configure({ provider: provider, user: { name: props.user.name, color: useColor(), avatar: props.user.picture } }),
+    CollaborationCursor.configure({
+      provider: provider,
+      user: {
+        name: props.user.name,
+        color: useColor(),
+        avatar: props.user.picture,
+      },
+    }),
   ],
   content: `<h1>Title</h1>`,
 });
@@ -187,8 +194,6 @@ onMounted(() => {
   /* Add more styles as needed */
 }
 
-
-
 /* Basic editor styles */
 .tiptap {
   > * + * {
@@ -210,8 +215,8 @@ onMounted(() => {
   position: relative;
   margin-left: -1px;
   margin-right: -1px;
-  border-left: 1px solid #0D0D0D;
-  border-right: 1px solid #0D0D0D;
+  border-left: 1px solid #0d0d0d;
+  border-right: 1px solid #0d0d0d;
   word-break: normal;
   pointer-events: none;
 }
@@ -226,10 +231,9 @@ onMounted(() => {
   font-weight: 600;
   line-height: normal;
   user-select: none;
-  color: #0D0D0D;
+  color: #0d0d0d;
   padding: 0.1rem 0.3rem;
   border-radius: 3px 3px 3px 0;
   white-space: nowrap;
 }
-
 </style>
