@@ -31,7 +31,7 @@ const md = MarkdownIt({
     );
   },
 });
-onMounted(async () => {
+onBeforeMount(async () => {
   if (!props.mounted) return;
   await fetchVoice(props.content);
 });

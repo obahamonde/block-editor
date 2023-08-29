@@ -55,6 +55,7 @@ watch(result, (val) => {
           <component
             :is="MAPPING[r.name]"
             :content="r.data"
+            :mounted="true"
           />
         </div>
       </template>
