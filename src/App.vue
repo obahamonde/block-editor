@@ -5,17 +5,17 @@
 useHead({
   title: "AioFauna",
   meta: [
-    { name: "description", content: "Opinionated Vite Starter Template" },
+    { name: "description", content: "The framework for building AI first applications" },
     {
       name: "theme-color",
-      content: () => (isDark.value ? "#00aba9" : "#ffffff"),
+      content: () => (isDark.value ? "#008080" : "#ffffff"),
     },
   ],
   link: [
     {
       rel: "icon",
       type: "image/svg+xml",
-      href: () => (preferredDark.value ? "/favicon-dark.svg" : "/favicon.svg"),
+      href: () => "/logo.png",
     },
   ],
 });
@@ -24,15 +24,3 @@ useHead({
 <template>
   <RouterView />
 </template>
-
-<style scoped>
-* {
-  font-family: "Montserrat", sans-serif;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-#app {
-  background-color: #000000;
-}
-</style>

@@ -1,15 +1,15 @@
 @import url("https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/github.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap&family=Open+Sans:wght@400;600;700&display=swap&family=DM+Mono:wght@400;500;600;700&display=swap&family=Roboto-Mono:wght@400;500;600;700&display=swap&Merriweather:wght@400;500;600;700&display=swap");
 
 .prose pre:not(.shiki) {
   padding: 0;
 }
 
 .prose .shiki {
-  font-family: "DM Mono", monospace;
-  font-size: 1.2em;
-  line-height: 1.4;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.0em;
+  line-height: 1.2;
 }
 
 .prose img {
@@ -17,7 +17,7 @@
 }
 
 .shiki-light {
-  background: #f8f8f8 !important;
+  background: #777 !important;
 }
 .shiki-dark {
   background: #000 !important;

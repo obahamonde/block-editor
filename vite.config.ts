@@ -10,7 +10,6 @@ import LinkAttributes from "markdown-it-link-attributes";
 import Unocss from "unocss/vite";
 import Shiki from "markdown-it-shiki";
 import VueMacros from "unplugin-vue-macros/vite";
-import WebfontDownload from "vite-plugin-webfont-dl";
 import VueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
@@ -23,15 +22,9 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://api.aiofauna.com/api",
+        target: "https://www.aiofauna.com/api",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
-        ws: true,
-      },
-      "/static": {
-        target: "https://api.aiofauna.com/static",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/static/, ""),
         ws: true,
       },
     },
@@ -63,7 +56,7 @@ export default defineConfig({
     AutoImport({
       imports: ["vue", "vue-router", "@vueuse/head", "@vueuse/core"],
       dts: "src/auto-imports.d.ts",
-      dirs: ["src/composables", "src/stores", "src/types", "src/content"],
+      dirs: ["src/composables", "src/stores", "src/types", "src/lib"],
       vueTemplate: true,
     }),
 
@@ -108,8 +101,5 @@ export default defineConfig({
       },
       wrapperComponent: "markdown-body",
     }),
-
-    // https://github.com/feat-agency/vite-plugin-webfont-dl
-    WebfontDownload(),
   ],
 });
