@@ -5,7 +5,7 @@ export const useChatStore = defineStore("chat", () => {
   const state = reactive({
     messages: [] as Message[],
     namespaces: [] as Namespace[],
-    currentNamespace: {} as Namespace,
+    currentNamespace: null as Namespace | null,
   });
 
   return { state };

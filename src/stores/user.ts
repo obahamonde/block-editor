@@ -5,8 +5,7 @@ export const useStore = defineStore("state", () => {
   const state = reactive({
     notifications: [] as Notification[],
     user: null as User | null,
-    messages: [] as Message[],
-    namespace: "default" as string | null,
+    messages: [] as Message[]
   });
 
   return {

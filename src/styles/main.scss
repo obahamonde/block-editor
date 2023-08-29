@@ -418,7 +418,6 @@ body {
 .message-box {
   box-shadow: var(--box-shadow);
   border-radius: 4px;
-  padding: 10px;
   font-size: 12px;
   line-height: 16px;
   width: auto;
@@ -494,7 +493,8 @@ body {
   }
 
   .app-main {
-    height: calc(100% - 48px);
+    height: 100%;
+  
   }
 }
 

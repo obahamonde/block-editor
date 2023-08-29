@@ -18,7 +18,7 @@ const handleSpeech = () => {
 </script>
 
 <template>
-  <div class="chat-input-wrapper fixed bottom-4 w-144">
+  <div class="chat-input-wrapper fixed bottom-4 w-136">
     <div class="input-wrapper">
       <input
         type="text"

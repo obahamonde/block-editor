@@ -1,5 +1,6 @@
 <script setup lang="ts">
-defineProps<{
+import TextBlock from '~/lib/TextBlock.vue';
+const props = defineProps<{
   image: string;
   content: string;
   ts?: number;
@@ -8,15 +9,15 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div class="message-wrapper" :class="{ reverse: $props.reverse }">
-    <img class="message-pp" :src="$props.image" alt="profile-pic" />
+  <div class="message-wrapper" :class="{ reverse: props.reverse }">
+    <img class="message-pp" :src="props.image" alt="profile-pic" />
     <div class="message-box-wrapper">
-      <TextBlock :content="$props.content" />
+      <TextBlock :content="props.content" />
     </div>
   </div>
   <span>{{
-    $props.ts
-      ? new Date($props.ts / 1000).toLocaleTimeString()
+    props.ts
+      ? new Date(props.ts / 1000).toLocaleTimeString()
       : new Date().toLocaleTimeString()
   }}</span>
 </template>

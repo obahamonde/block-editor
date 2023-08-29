@@ -34,6 +34,15 @@ const deleteNamespace = async (namespace: Namespace) => {
 
 onMounted(async () => {
   await fetchNamespaces();
+  if (state.namespaces.length > 0) {
+    state.currentNamespace = state.namespaces[0];
+    emit("change", state.namespaces[0].ref);
+  }
+  else{
+    await createNamespace();
+  state.currentNamespace = state.namespaces[0];
+  emit("change", state.namespaces[0].ref);
+  }
 });
 
 const handleNamespaceChange = async (namespace: Namespace) => {
@@ -47,14 +56,14 @@ const handleNamespaceChange = async (namespace: Namespace) => {
 <template>
   <div class="chat-list-wrapper">
     <div class="chat-list-header">
-      New Conversation <span class="c-number" @click="createNamespace">+</span>
+      New Namespace<span class="c-number" @click="createNamespace">+</span>
       <Icon icon="mdi-chevron-down" class="m-2" />
     </div>
     <ul class="chat-list active" v-if="state.namespaces.length > 0">
       <li
         v-for="namespace in state.namespaces"
         class="chat-list-item"
-        :class="state.currentNamespace.ref == namespace.ref ? 'active' : ''"
+        :class="state.currentNamespace!.ref == namespace.ref ? 'active' : ''"
         @click="handleNamespaceChange(namespace)"
       >
         <Icon icon="mdi-chat" class="x1 mx-1" />

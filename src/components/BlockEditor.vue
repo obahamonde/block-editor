@@ -8,7 +8,7 @@ import TaskItem from "@tiptap/extension-task-item";
 import Collaboration from "@tiptap/extension-collaboration";
 import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
 import { Block, BlockMapping, User } from "~/types";
-import { v4 as generateUniqueId } from "uuid";
+import { v4 as uuid4 } from "uuid";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 const props = defineProps<{
@@ -33,7 +33,7 @@ const editor: ShallowRef<Editor | undefined> = useEditor({
       },
     }),
   ],
-  content: `<h1>Title</h1>`,
+  content: `# Title`,
 });
 const blocks = ref<Block[]>([]);
 watch(
@@ -89,7 +89,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key === "Enter") {
     if (!editor.value) return;
     const newBlock: Block = {
-      id: generateUniqueId(),
+      id: uuid4(),
       type: "TextBlock",
       content: editor.value.getHTML(),
     };
@@ -108,7 +108,7 @@ const deleteBlock = (id: string) => {
 const insertBlock = (component: "TextBlock") => {
   if (!editor.value) return;
   const newBlock: Block = {
-    id: generateUniqueId(),
+    id: uuid4(),
     type: component,
     content: "",
   };
@@ -125,7 +125,7 @@ onMounted(() => {
   if (!editor.value) return;
   editor.value.commands.focus();
   blocks.value.push({
-    id: generateUniqueId(),
+    id: uuid4(),
     type: "TextBlock",
     content: `<h1>Title</h1>`,
   });

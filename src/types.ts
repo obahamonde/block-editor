@@ -85,3 +85,20 @@ export type FunctionCall = {
   name: string;
   data: any;
 };
+
+export type SearchResult = {
+  title: string
+  url: string
+}
+
+export type Blog = {
+  title: string
+  topic: string
+  content: string
+}
+
+export type Song = {
+  title: string
+  genre: string
+  lyrics: string
+}
