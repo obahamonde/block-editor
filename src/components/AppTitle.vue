@@ -3,6 +3,6 @@
     <div class="app-logo ">
       <img src="/logo.png" class="x4 cp hover:animate-pulse" alt="logo" />
     </div>
-    <h1 class="text-success font-script text-5xl">AioFauna</h1>
+    <h1 class="text-success text-title text-4xl">AioFauna</h1>
   </div>
 </template>
