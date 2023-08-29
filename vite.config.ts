@@ -23,13 +23,13 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://www.aiofauna.com/api",
+        target: "https://api.aiofauna.com/api",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
         ws: true,
       },
       "/static": {
-        target: "https://www.aiofauna.com/static",
+        target: "https://api.aiofauna.com/static",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/static/, ""),
         ws: true,
@@ -38,7 +38,7 @@ export default defineConfig({
   },
 
   build: {
-    outDir: "dist",
+    outDir: "../static",
     emptyOutDir: true,
   },
 
