@@ -44,7 +44,7 @@ const routes = ref<RouteLink[]>([
         @mouseleave="route.visible = false"
       >
         <span class="col center">
-          <Icon :icon="route.icon" class="x2" />
+          <Icon :icon="route.icon" class="x2 text-white" />
         </span>
         <span :class="route.visible ? '' : 'opacity-0'">
           {{ route.text }}

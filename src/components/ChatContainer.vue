@@ -98,7 +98,7 @@ const handleSend = (text: string) => {
           @send="handleSend($event)"
         >
           <template #default="{ data }">
-            <ChatMessage image="/logo.png" :content="data" :reverse="false" />
+            <ChatMessage image="/chatbot.svg" :content="data" :reverse="false" />
           </template>
         </ServerEvent>
       </div>
@@ -112,7 +112,7 @@ const handleSend = (text: string) => {
       <div class="chat-wrapper">
         <ChatMessage
           :image="
-            message.owner == props.user.ref ? props.user.picture! : '/logo.png'
+            message.owner == props.user.ref ? props.user.picture! : '/chatbot.svg'
           "
           :content="message.content"
           :ts="message.ts"
