@@ -38,9 +38,9 @@ watch(isAuthenticated, async (isAuthenticated) => {
   </div>
   <div v-else>
     <div class="container">
-      <Icon icon="mdi-loading" class="animate-spin" />
+      <Icon icon="mdi-loading" class="animate-spin x2" />
       <h1 class="text-2xl">Loading...</h1>
-      <button class="btn" @click="loginWithRedirect">Login</button>
+      <button class="btn-get" @click="loginWithRedirect()">Login</button>
     </div>
   </div>
 </template>

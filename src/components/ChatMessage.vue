@@ -15,9 +15,4 @@ const props = defineProps<{
       <TextBlock :content="props.content" />
     </div>
   </div>
-  <span class="text-xs">{{
-    props.ts
-      ? new Date(props.ts / 1000).toLocaleTimeString()
-      : new Date().toLocaleTimeString()
-  }}</span>
 </template>

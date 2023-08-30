@@ -39,7 +39,7 @@ onBeforeMount(async () => {
 </script>
 <template>
   <div
-    class="markdown-body bg-gray-400 rounded sh max-w-2xl text-xs"
+    class="markdown-body bg-gray-400 rounded sh max-w-lg text-xs"
     v-html="md.render(props.content)"
   ></div>
 </template>

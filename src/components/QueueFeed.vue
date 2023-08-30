@@ -46,7 +46,7 @@ watch(result, (val) => {
 </script>
 <template>
   <div
-    class="main-container col center h-90vh pt-24 px-2 overflow-auto gap-8 center w-full text-white max-w-128 min-w-72"
+    class="col center h-90vh pt-24   overflow-auto gap-8 center w-full text-white max-w-96 min-w-72"
     v-if="store.currentNamespace"
   >
     <PubSub :namespace="store.currentNamespace" v-if="store.currentNamespace">

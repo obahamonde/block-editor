@@ -82,9 +82,9 @@ const handleSend = (text: string) => {
 </script>
 
 <template>
-  <div class="chat-wrapper min-w-128 max-w-144" v-if="props.namespace">
-    <div class="message-wrapper">
-      <div class="chat-wrapper">
+  <div class="chat-wrapper w-full  max-w-168" v-if="props.namespace">
+    <div class="message-wrapper  max-w-168">
+      <div class="chat-wrapper  min-w-128">
         <ServerEvent
           :url="
             '/api/chat/' +

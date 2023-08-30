@@ -3,7 +3,7 @@
     <Notifier />
     <main class="row center p-4 max-h-100vh">
       <RouterView />
-      <Timeline />
+      <QueueFeed/>
       <NavBar />
     </main>
   </Auth>

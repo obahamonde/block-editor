@@ -25,6 +25,7 @@ declare module 'vue' {
     Notifier: typeof import('./components/Notifier.vue')['default']
     ProfileBox: typeof import('./components/ProfileBox.vue')['default']
     PubSub: typeof import('./components/PubSub.vue')['default']
+    QueueFeed: typeof import('./components/QueueFeed.vue')['default']
     Request: typeof import('./components/Request.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

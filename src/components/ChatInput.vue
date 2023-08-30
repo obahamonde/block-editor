@@ -18,7 +18,8 @@ const handleSpeech = () => {
 </script>
 
 <template>
-  <div class="chat-input-wrapper fixed bottom-4 w-136">
+  <div class="col center">
+  <div class="chat-input-wrapper fixed bottom-4">
     <div class="input-wrapper">
       <input
         type="text"
@@ -30,6 +31,7 @@ const handleSpeech = () => {
           text = '';
         "
       />
+      </div>
       <button class="chat-mic-btn cp scale">
         <Icon
           :icon="!isListening ? 'mdi-microphone' : 'mdi-microphone-off'"
@@ -38,14 +40,5 @@ const handleSpeech = () => {
         />
       </button>
     </div>
-    <button
-      class="chat-send-btn scale cp hover:bg-blue-500"
-      @click="
-        $emit('send', text);
-        text = '';
-      "
-    >
-      Send
-    </button>
   </div>
 </template>
