@@ -31,10 +31,15 @@ const routes = ref<RouteLink[]>([
     visible: false,
   },
 ]);
+
+const routerVisible = ref(false);
+
 </script>
 <template>
+
   <div
     class="col center right-4 top-0 bottom-0 absolute animate-slide-in-right"
+    v-if="routerVisible"
   >
     <p class="decoration-none" v-for="route in routes">
       <RouterLink
@@ -52,4 +57,8 @@ const routes = ref<RouteLink[]>([
       </RouterLink>
     </p>
   </div>
+
+  <Icon  icon="mdi-menu" class="text-white tr fixed m-4 z-50 scale cp x2"
+  @click="routerVisible = !routerVisible"
+  />
 </template>

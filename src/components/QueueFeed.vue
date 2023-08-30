@@ -62,9 +62,6 @@ watch(result, (val) => {
     </PubSub>
   
     <div class="z-50">
-      <input type="text" v-model="message" class="input"
-        @keyup.enter="useFunction()"
-      />
       <Icon
       :icon="!isListening ? 'mdi-microphone' : 'mdi-microphone-off'"
         class="x2 bottom-8 right-4 absolute chat-mic-btn"
@@ -76,7 +73,15 @@ watch(result, (val) => {
   <div v-else class="col center w-full">
       <p class="text-caption mr-16">Select a namespace to start using tools</p>
     </div>
+
+    
+      <input type="text" v-model="message" class="input br fixed mr-16 mb-9 bg-gray-500"
+        @keyup.enter="useFunction()"
+      />
+
 </template>
+
+
 <style scoped>
 .main-container {
   display: flex;

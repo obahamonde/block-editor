@@ -27,7 +27,7 @@ const md = MarkdownIt({
       } catch (__) {}
     }
     return (
-      '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
+      '<pre class="hljs" ><code >' + md.utils.escapeHtml(str) + "</code></pre>"
     );
   },
 });
@@ -39,7 +39,7 @@ onBeforeMount(async () => {
 </script>
 <template>
   <div
-    class="markdown-body bg-gray-400 rounded sh max-w-lg text-xs"
+    class="markdown-body bg-gray-500 text-white rounded sh max-w-lg text-xs"
     v-html="md.render(props.content)"
   ></div>
 </template>
