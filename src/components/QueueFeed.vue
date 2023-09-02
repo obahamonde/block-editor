@@ -78,6 +78,7 @@ watch(result, (val) => {
 
     
       <input type="text" v-model="message" class="input br fixed mr-16 mb-9 bg-gray-500"
+        placeholder="Call a function..."
         @keyup.enter="useFunction()"
       />
 

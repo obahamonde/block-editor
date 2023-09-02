@@ -28,7 +28,7 @@ watchEffect(() => {
 });
 
 watch(data, async (newData) => {
-  if (!state.namespace) return;
+  if (!state.user) return;
   emit("receive", newData);
   for (let i = 0; i < newData.length; i += 1) {
     const chunk = newData.slice(i, i + 1);

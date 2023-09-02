@@ -24,6 +24,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, onDrop);
 const { state } = useChatStore();
 
 const uploadFiles = async () => {
+  if (!state.currentNamespace) return;
   const formData = new FormData();
   formData.append("file", fileData.value[0].file);
   const url = `/api/load/csv/${state.currentNamespace.ref}`;
