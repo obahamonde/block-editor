@@ -5,16 +5,12 @@
 useHead({
   title: "AioFauna",
   meta: [
-    { name: "description", content: "The framework for building AI first applications" },
-    {
-      name: "theme-color",
-      content: () => (isDark.value ? "#008080" : "#ffffff"),
-    },
+    { name: "description", content: "The framework for building AI first applications" }
   ],
   link: [
     {
       rel: "icon",
-      type: "image/svg+xml",
+      type: "image/png",
       href: () => "/logo.png",
     },
   ],
