@@ -102,3 +102,15 @@ export type Song = {
   genre: string
   lyrics: string
 }
+
+export type ConversationMessage = {
+  user?: User
+  content: string
+}
+
+export type Conversation = {
+  namespace: string
+  title?: string
+  participants?: User[]
+  messages?: ConversationMessage[]
+}

@@ -10,6 +10,8 @@ const MAPPING:Record<string,Component> = {
   code_server: blocks.CodeServer,
   blog: blocks.BlogPost,
   song: blocks.Songs,
+  image_generation: blocks.ImageGenerated,
+  logos_search: blocks.LogosSearch,
 };
 
 const useFunction = async () => {
@@ -46,12 +48,12 @@ watch(result, (val) => {
 </script>
 <template>
   <div
-    class="col center h-90vh pt-24   overflow-auto gap-8 center w-full text-white max-w-96 min-w-72"
+    class="col center h-90vh py-24 overflow-auto center w-full text-white max-w-96 min-w-72"
     v-if="store.currentNamespace"
   >
     <PubSub :namespace="store.currentNamespace" v-if="store.currentNamespace">
       <template #default="{ state }">
-        <div class="col center w-full pt-16 h-70vh overflow-auto" v-for="r in state">
+        <div class="col center w-full mt-8" v-for="r in state">
           <component
             :is="MAPPING[r.name]"
             :content="r.data"

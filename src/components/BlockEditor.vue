@@ -7,7 +7,7 @@ import Image from "@tiptap/extension-image";
 import TaskItem from "@tiptap/extension-task-item";
 import Collaboration from "@tiptap/extension-collaboration";
 import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
-import { Block, BlockMapping, User } from "~/types";
+import { Block, BlockMapping, User, Namespace } from "~/types";
 import { v4 as uuid4 } from "uuid";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
@@ -33,7 +33,7 @@ const editor: ShallowRef<Editor | undefined> = useEditor({
       },
     }),
   ],
-  content: `# Title`,
+  content: `Title`,
 });
 const blocks = ref<Block[]>([]);
 watch(

@@ -41,7 +41,7 @@ const routerVisible = ref(false);
     class="col center right-4 top-0 bottom-0 absolute animate-slide-in-right"
     v-if="routerVisible"
   >
-    <p class="decoration-none" v-for="route in routes">
+    <p class="decoration-none text-white" v-for="route in routes">
       <RouterLink
         :to="route.to"
         class="no-underline cp hover:brightness-200"
@@ -49,7 +49,7 @@ const routerVisible = ref(false);
         @mouseleave="route.visible = false"
       >
         <span class="col center">
-          <Icon :icon="route.icon" class="x2 text-white" />
+          <Icon :icon="route.icon" class="x2" />
         </span>
         <span :class="route.visible ? '' : 'opacity-0'">
           {{ route.text }}
@@ -58,7 +58,13 @@ const routerVisible = ref(false);
     </p>
   </div>
 
-  <Icon  icon="mdi-menu" class="text-white tr fixed m-4 z-50 scale cp x2"
+  <Icon  icon="mdi-menu" class="text-white hover:text-success tr fixed m-4 z-50 scale cp x2"
   @click="routerVisible = !routerVisible"
   />
 </template>
+<style scoped lang="scss">
+.router-link-active {
+  @apply text-success;
+}
+
+</style>
