@@ -27,7 +27,7 @@ watch(query, () => {
     >
     <Icon icon="logos:pypi" class="x3 m-2 scale invert"/>
   </a>
-  <RouterLink to="/docs" class="m-2 scale invert" 
+  <RouterLink to="/doc" class="m-2 scale invert" 
     title="Documentation">
     <Icon icon="mdi-document" class="x3"/>
   </RouterLink>
