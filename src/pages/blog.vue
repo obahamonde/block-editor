@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Editor } from '@tiptap/vue-3';
-
+const { complete, text } = useCompletion()
 const { state } = useChatStore();
 const { state:store } = useStore();
 const props = reactive({
@@ -65,6 +65,14 @@ const deletePost = async(ref: string)=>{
 	await fetchContent()
 }
 
+const handleKeydown = async() => {
+		const editor = editorRef.value.editor as Editor
+		await complete(editor.getText())
+		editor.chain().insertContent(text.value).run()			
+	}
+
+
+
 </script>
 <template>
 <section class="row center" v-if="props.user">
@@ -82,7 +90,7 @@ const deletePost = async(ref: string)=>{
 
 	<div v-if="focusing === 'editor'" class="pt-8">
 <Tiptap :namespace="props.namespace" :user="props.user" 
-  ref="editorRef" 
+  ref="editorRef" @keyup.ctrl.space="handleKeydown"
 />
 
 </div>

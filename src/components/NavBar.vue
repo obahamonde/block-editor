@@ -7,7 +7,7 @@ interface RouteLink {
 }
 const routes = ref<RouteLink[]>([
   {
-    to: "/",
+    to: "/chat",
     text: "Chat",
     icon: "mdi-chat",
     visible: false,
@@ -33,7 +33,7 @@ const routerVisible = ref(false);
     <p class="decoration-none text-white" v-for="route in routes">
       <RouterLink
         :to="route.to"
-        class="no-underline cp hover:brightness-200"
+        class="no-underline cp hover:brightness-200 text-white"
         @mouseover="route.visible = true"
         @mouseleave="route.visible = false"
       >

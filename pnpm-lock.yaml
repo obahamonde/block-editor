@@ -23,6 +23,9 @@ dependencies:
   '@tiptap/extension-link':
     specifier: ^2.1.7
     version: 2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)
+  '@tiptap/extension-mention':
+    specifier: ^2.1.8
+    version: 2.1.8(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)(@tiptap/suggestion@2.1.8)
   '@tiptap/extension-task-item':
     specifier: ^2.1.7
     version: 2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)
@@ -1391,6 +1394,18 @@ packages:
       '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
     dev: false
 
+  /@tiptap/extension-mention@2.1.8(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)(@tiptap/suggestion@2.1.8):
+    resolution: {integrity: sha512-HthABZWnbmUdq4FR1Rv1q/xv4akTH4fKk+xEOxf/Ei2JqAkv+qohgDPh5P9Hae5pa473P2e9ttgfc4J9o074Pw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+      '@tiptap/suggestion': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
+      '@tiptap/pm': 2.1.7
+      '@tiptap/suggestion': 2.1.8(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)
+    dev: false
+
   /@tiptap/extension-ordered-list@2.1.7(@tiptap/core@2.1.7):
     resolution: {integrity: sha512-3XIXqbZmYkNzF+8PQ2jcCOCj0lpC3y9HGM/+joPIunhiUiktrIgpbUDv2E1Gq5lJHYqthIeujniI2dB85tkwJQ==}
     peerDependencies:
@@ -1496,6 +1511,16 @@ packages:
       '@tiptap/extension-text': 2.1.7(@tiptap/core@2.1.7)
     transitivePeerDependencies:
       - '@tiptap/pm'
+    dev: false
+
+  /@tiptap/suggestion@2.1.8(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7):
+    resolution: {integrity: sha512-3QypKFCeZSRrjgSz0n0JE5SimisolaxDZn45GGtkXuJWmKGCmsJw9UsXeH3S9ZuP3pvPImL0P9uAHlhRReRw1w==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
+      '@tiptap/pm': 2.1.7
     dev: false
 
   /@tiptap/vue-3@2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)(vue@3.3.4):

@@ -3,13 +3,15 @@ import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
-
 const props = defineProps({
   content: {
     type: String,
     default: "",
   },
 });
+
+
+
 
 const editor= useEditor({
   extensions: [
@@ -52,7 +54,7 @@ defineExpose(
     margin-top: 0.75em;
   }
   img {
-    max-width: 50%;
+    max-width: 20%;
   }
 }
 </style>
