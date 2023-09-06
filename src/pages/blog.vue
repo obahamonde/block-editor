@@ -72,7 +72,7 @@ const deletePost = async(ref: string)=>{
 <ProfileBox :user="props.user" />
 <ChatList :user="props.user" />
 </div>
-<div class="app-main col center h-100vh">
+<div class="app-main col center h-full">
 
 	<nav class="row center top-2 gap-4 absolute z-50 bg-gray-500  max-w-128 w-full rounded-lg sh py-1">
 	<Icon icon="mdi-pencil" class="text-lime-300 row center cp scale hover:text-blue" @click="focusThis('editor')" />
@@ -80,14 +80,14 @@ const deletePost = async(ref: string)=>{
 	<Icon icon="mdi-post" class="text-lime-300 row center cp scale hover:text-blue" @click="fetchContent" />
 </nav>
 
-	<div v-if="focusing === 'editor'">
+	<div v-if="focusing === 'editor'" class="pt-8">
 <Tiptap :namespace="props.namespace" :user="props.user" 
   ref="editorRef" 
 />
 
 </div>
 <div v-else-if="focusing === 'posts'" class="w-full h-full">
-	 <div class="col center gap-4 rounded-lg p-4" v-for="post in posts" :key="post.ref" >
+	 <div class="col center rounded-lg pt-8" v-for="post in posts" :key="post.ref" >
 			<p class="text-gray-300 text-xs row center">{{ new Date(Number(post.ts)).toLocaleString() }}
 			<Icon icon="mdi-delete" class="text-lime-300 row center cp scale hover:text-blue" @click="deletePost(post.ref)" />
 			</p>

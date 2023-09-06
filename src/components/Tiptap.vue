@@ -35,9 +35,9 @@ defineExpose(
 )
 </script>
 <template>
-<div class="min-w-168 w-full mt-6">
+<div class="min-w-128 w-full">
     <EditorContent
-       class="tiptap bg-white  min-h-80vh text-black p-8 rounded sh"
+       class="tiptap bg-white  min-h-90vh text-black p-2 rounded sh"
       :editor="editor"
       @keydown.tab="onTab"
       />
