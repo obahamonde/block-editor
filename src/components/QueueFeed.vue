@@ -66,7 +66,7 @@ watch(result, (val) => {
     <div class="z-50">
       <Icon
       :icon="!isListening ? 'mdi-microphone' : 'mdi-microphone-off'"
-        class="x2 bottom-8 right-4 absolute chat-mic-btn"
+        class="x2 bottom-8 right-1 absolute chat-mic-btn"
         @click="handleSpeech"
       />
     </div>

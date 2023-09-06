@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import type { User } from "~/types";
+const props = defineProps<{
+  user: User;
+}>();
+const showSubMenu = ref(false);
+</script>
+
 <template>
   <div class="app-profile-box">
     <img :src="props.user.picture" alt="profile" />
@@ -16,10 +24,3 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import type { User } from "~/types";
-const props = defineProps<{
-  user: User;
-}>();
-const showSubMenu = ref(false);
-</script>

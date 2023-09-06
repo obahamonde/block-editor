@@ -18,18 +18,7 @@ const routes = ref<RouteLink[]>([
     icon: "mdi-post",
     visible: false,
   },
-  {
-    to: "/profile",
-    text: "Profile",
-    icon: "mdi-account-circle",
-    visible: false,
-  },
-  {
-    to: "/notes",
-    text: "Notes",
-    icon: "mdi-notebook",
-    visible: false,
-  },
+ 
 ]);
 
 const routerVisible = ref(false);
@@ -38,7 +27,7 @@ const routerVisible = ref(false);
 <template>
 
   <div
-    class="col center right-4 top-0 bottom-0 absolute animate-slide-in-right"
+    class="col center right-0 top-0 bottom-0 absolute animate-slide-in-right"
     v-if="routerVisible"
   >
     <p class="decoration-none text-white" v-for="route in routes">
@@ -58,7 +47,7 @@ const routerVisible = ref(false);
     </p>
   </div>
 
-  <Icon  icon="mdi-menu" class="text-white hover:text-success tr fixed m-4 z-50 scale cp x2"
+  <Icon  icon="mdi-menu" class="text-white hover:text-success tr fixed m-1 z-50 scale cp x2"
   @click="routerVisible = !routerVisible"
   />
 </template>
