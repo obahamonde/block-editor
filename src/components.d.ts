@@ -22,6 +22,7 @@ declare module 'vue' {
     ProfileBox: typeof import('./components/ProfileBox.vue')['default']
     PubSub: typeof import('./components/PubSub.vue')['default']
     QueueFeed: typeof import('./components/QueueFeed.vue')['default']
+    Raw: typeof import('./components/Raw.vue')['default']
     Request: typeof import('./components/Request.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

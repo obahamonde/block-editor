@@ -72,10 +72,40 @@ const handleKeydown = async() => {
 	}
 
 
+const fetchAll = async () => {
+const { data } =  await useFetch("/api/blog", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	}).json()
+	posts.value = unref(data) as {content:string, user: string, namespace: string, ref: string, ts: number}[]
+	focusThis("feed")
+}
 
+onMounted(async () => {
+	await fetchAll()
+})
+
+const updateContent = async (id: string) => {
+	if (!props.user) return;
+	if (!props.namespace) return;
+	if (focused.value !== "posts") return;
+	const content = document.getElementById(id)?.innerHTML
+	await useFetch("/api/blog/" + id + "?content=" + content, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	store.notifications.push({
+		status: "success",
+		message: "Content saved",
+	});
+};
 </script>
 <template>
-<section class="row center" v-if="props.user">
+<section class="row center w-full h-full" v-if="props.user">
 <div class="app-left max-w-48 col center">
 <ProfileBox :user="props.user" />
 <ChatList :user="props.user" />
@@ -83,6 +113,7 @@ const handleKeydown = async() => {
 <div class="app-main col center h-full">
 
 	<nav class="row center top-2 gap-4 absolute z-50 bg-gray-500  max-w-128 w-full rounded-lg sh py-1">
+	<Icon icon="mdi-newspaper" class="text-lime-300 row center cp scale hover:text-blue" @click="fetchAll" />
 	<Icon icon="mdi-pencil" class="text-lime-300 row center cp scale hover:text-blue" @click="focusThis('editor')" />
 	<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="postContent" />
 	<Icon icon="mdi-post" class="text-lime-300 row center cp scale hover:text-blue" @click="fetchContent" />
@@ -90,6 +121,7 @@ const handleKeydown = async() => {
 
 	<div v-if="focusing === 'editor'" class="pt-8">
 <Tiptap :namespace="props.namespace" :user="props.user" 
+
   ref="editorRef" @keyup.ctrl.space="handleKeydown"
 />
 
@@ -98,15 +130,22 @@ const handleKeydown = async() => {
 	 <div class="col center rounded-lg pt-8" v-for="post in posts" :key="post.ref" >
 			<p class="text-gray-300 text-xs row center">{{ new Date(Number(post.ts)).toLocaleString() }}
 			<Icon icon="mdi-delete" class="text-lime-300 row center cp scale hover:text-blue" @click="deletePost(post.ref)" />
+			<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="updateContent(post.ref)" />
 			</p>
 			<Tiptap :namespace="props.namespace" :user="props.user" 
 			 :content="post.content"
-			
+				:id="post.ref"
 			/>
 			</div>
+</div>
+<div v-else-if="focusing === 'feed'">
+	 <div class="col center rounded-lg pt-8" v-for="post in posts" :key="post.ref" >
+			<p class="text-gray-300 text-xs row center">{{ new Date(Number(post.ts)).toLocaleString() }}
+			</p>
+			<Raw :content="post.content"  />
+</div>
 </div>
 </div>
 </section>
   </template>
-
 
