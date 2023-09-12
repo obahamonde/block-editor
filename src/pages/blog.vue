@@ -3,7 +3,7 @@ import { Editor } from '@tiptap/vue-3';
 const { complete, text } = useCompletion()
 const { state } = useChatStore();
 const { state:store } = useStore();
-const props = reactive({
+const localState = reactive({
 	user: store.user,
 	namespace: state.currentNamespace,
 });
@@ -15,9 +15,9 @@ const focusThis = (name: string) => {
 const focusing = computed(()=>focused.value)
 const posts = ref<{content:string, user: string, namespace: string, ref: string, ts: number}[]>([])
 const fetchContent = async()=> {
-	if (!props.user) return;
-	if (!props.namespace) return;
-	const { data } = await useFetch("/api/blog/" + props.namespace.ref, {
+	if (!localState.user) return;
+	if (!localState.namespace) return;
+	const { data } = await useFetch("/api/blog/" + localState.namespace.ref, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -25,19 +25,18 @@ const fetchContent = async()=> {
 	}).json()
 	posts.value = unref(data) as {content:string, user: string, namespace: string, ref: string, ts: number}[]
 	if (!posts.value.length) return;
-	focusThis("posts")
 }
 const postContent = async()=>{
 	if (!editorRef.value) return;
-	if (!props.user) return;
-	if (!props.namespace) return;
+	if (!localState.user) return;
+	if (!localState.namespace) return;
 	const editor = editorRef.value.editor as Editor
 	const content = editor.getHTML()
 	await useFetch("/api/blog", {
 		method: "POST",
 		body: JSON.stringify({
-			user: props.user.ref,
-			namespace: props.namespace.ref,
+			user: localState.user.ref,
+			namespace: localState.namespace.ref,
 			content
 		}),
 		headers: {
@@ -50,8 +49,8 @@ const postContent = async()=>{
 	});
 }
 const deletePost = async(ref: string)=>{
-	if (!props.user) return;
-	if (!props.namespace) return;
+	if (!localState.user) return;
+	if (!localState.namespace) return;
 	await useFetch("/api/blog/" + ref, {
 		method: "DELETE",
 		headers: {
@@ -86,16 +85,11 @@ const { data } =  await useFetch("/api/blog", {
 		},
 	}).json()
 	posts.value = unref(data) as {content:string, user: string, namespace: string, ref: string, ts: number}[]
-	focusThis("feed")
 }
 
-onMounted(async () => {
-	await fetchAll()
-})
-
 const updateContent = async (id: string) => {
-	if (!props.user) return;
-	if (!props.namespace) return;
+	if (!localState.user) return;
+	if (!localState.namespace) return;
 	if (focused.value !== "posts") return;
 	const content = document.getElementById(id)?.innerHTML
 	await useFetch("/api/blog/" + id + "?content=" + content, {
@@ -109,44 +103,69 @@ const updateContent = async (id: string) => {
 		message: "Content saved",
 	});
 };
+
+onMounted(async () => {
+	await fetchAll()
+})
+
+watch(focused, async (val) => {
+	switch (val) {
+		case "Editor":
+			await fetchContent()
+			break;
+		case "Your Posts":
+			await fetchContent()
+			break;
+		case "Feed":
+			await fetchAll()
+			break;
+	}
+})
+
 </script>
 <template>
-<section class="row center w-full h-full" v-if="props.user">
+<section class="row center w-full h-full" v-if="localState.user">
 <div class="app-left max-w-48 col center">
-<ProfileBox :user="props.user" />
-<ChatList :user="props.user" />
+<ProfileBox :user="localState.user" />
+<ChatList :user="localState.user" />
 </div>
-<div class="app-main col center h-full">
+<div class="app-main col center h-screen">
 
 	<nav class="row center top-2 gap-4 absolute z-50 bg-gray-500  max-w-128 w-full rounded-lg sh py-1">
-	<Icon icon="mdi-newspaper" class="text-lime-300 row center cp scale hover:text-blue" @click="fetchAll" />
-	<Icon icon="mdi-pencil" class="text-lime-300 row center cp scale hover:text-blue" @click="focusThis('editor')" />
-	<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="postContent" />
-	<Icon icon="mdi-post" class="text-lime-300 row center cp scale hover:text-blue" @click="fetchContent" />
+	<Icon icon="mdi-newspaper" class="text-lime-300 row center cp scale hover:text-blue" @click="focusThis('Feed')" />
+	<Icon icon="mdi-pencil" class="text-lime-300 row center cp scale hover:text-blue" @click="focusThis('Editor')" />
+	<Icon icon="mdi-post" class="text-lime-300 row center cp scale hover:text-blue" @click="focusThis('Your Posts')" />
 </nav>
 
-	<div v-if="focusing === 'editor'" class="pt-8">
-<Tiptap :namespace="props.namespace" :user="props.user" 
-
+	<div v-if="focusing === 'Editor'" class="w-full h-screen mt-8">
+			<h1 class="text-center">{{ focused }}</h1>
+		<div class="col center rounded-lg" v-for="post in posts" :key="post.ref" >
+			<p class="text-gray-300 text-xs row center gap-2">{{ new Date(Number(post.ts)).toLocaleString() }}
+			<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="postContent()" />
+			</p>
+		<Tiptap :namespace="localState.namespace" :user="localState.user" 
   ref="editorRef" @keyup.ctrl.space="handleKeydown"
 />
-
 </div>
-<div v-else-if="focusing === 'posts'" class="w-full h-full">
-	 <div class="col center rounded-lg pt-8" v-for="post in posts" :key="post.ref" >
-			<p class="text-gray-300 text-xs row center">{{ new Date(Number(post.ts)).toLocaleString() }}
+</div>
+<div v-else-if="focusing === 'Your Posts'" class="w-full h-screen mt-8">
+	<h1 class="text-center">{{ focused }}</h1>
+	 <div class="col center rounded-lg" v-for="post in posts" :key="post.ref" >	
+		<p class="text-gray-300 text-xs row center gap-2">{{ new Date(Number(post.ts)).toLocaleString() }}
 			<Icon icon="mdi-delete" class="text-lime-300 row center cp scale hover:text-blue" @click="deletePost(post.ref)" />
 			<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="updateContent(post.ref)" />
 			</p>
-			<Tiptap :namespace="props.namespace" :user="props.user" 
+			<Tiptap :namespace="localState.namespace" :user="localState.user" 
 			 :content="post.content"
 				:id="post.ref"
 				@keyup.ctrl.space="handleKeyDownUpdate(post.ref)"
 			/>
 			</div>
 </div>
-<div v-else-if="focusing === 'feed'">
-	 <div class="col center rounded-lg pt-8" v-for="post in posts" :key="post.ref" >
+<div v-else-if="focusing === 'Feed'" class="w-full h-screen mt-8">
+	<h1 class="text-center">{{ focused }}</h1>
+	<div class="col center rounded-lg" v-for="post in posts" :key="post.ref" >
+
 			<p class="text-gray-300 text-xs row center">{{ new Date(Number(post.ts)).toLocaleString() }}
 			</p>
 			<Raw :content="post.content"  />
