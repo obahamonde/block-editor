@@ -7,7 +7,8 @@ const localState = reactive({
 	user: store.user,
 	namespace: state.currentNamespace,
 });
-const editorRef = ref<any>(null);
+const editorRef = ref<any>()
+const editorRefs = ref<{[key:string]:any}>({})
 const focused = ref<string>("editor")
 const focusThis = (name: string) => {
 	focused.value = name
@@ -67,13 +68,13 @@ const deletePost = async(ref: string)=>{
 const handleKeydown = async() => {
 		const editor = editorRef.value.editor as Editor
 		await complete(editor.getText())
-		editor.chain().insertContent(text.value).run()			
+		editor.chain().insertContent(text.value).run()		
 	}
 
-const handleKeyDownUpdate = async(id: string) => {
-		const content = document.getElementById(id)?.innerHTML as string
+const handleKeyDownUpdate = async(editor:Editor) => {
+		const content = editor.getText()
 		await complete(content)
-		document.getElementById(id)!.innerHTML = content + text.value
+		editor.chain().insertContent(text.value).run()
 	}
 
 
@@ -88,10 +89,7 @@ const { data } =  await useFetch("/api/blog", {
 }
 
 const updateContent = async (id: string) => {
-	if (!localState.user) return;
-	if (!localState.namespace) return;
-	if (focused.value !== "posts") return;
-	const content = document.getElementById(id)?.innerHTML
+	const content = document.getElementById(id)?.innerHTML as string
 	await useFetch("/api/blog/" + id + "?content=" + content, {
 		method: "PUT",
 		headers: {
@@ -105,7 +103,7 @@ const updateContent = async (id: string) => {
 };
 
 onMounted(async () => {
-	await fetchAll()
+	focusThis("Feed")
 })
 
 watch(focused, async (val) => {
@@ -139,12 +137,12 @@ watch(focused, async (val) => {
 
 	<div v-if="focusing === 'Editor'" class="w-full h-screen mt-8">
 			<h1 class="text-center">{{ focused }}</h1>
-		<div class="col center rounded-lg" v-for="post in posts" :key="post.ref" >
-			<p class="text-gray-300 text-xs row center gap-2">{{ new Date(Number(post.ts)).toLocaleString() }}
-			<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="postContent()" />
+		<div class="col center rounded-lg">
+			<p class="text-gray-300 text-xs row center gap-2">
+				<Icon icon="mdi-floppy" class="text-lime-300 row center cp scale hover:text-blue" @click="postContent()" />
 			</p>
-		<Tiptap :namespace="localState.namespace" :user="localState.user" 
-  ref="editorRef" @keyup.ctrl.space="handleKeydown"
+		<Tiptap :namespace="localState.namespace" :user="localState.user"
+   @keyup.ctrl.space="handleKeydown" ref="editorRef"
 />
 </div>
 </div>
@@ -157,8 +155,9 @@ watch(focused, async (val) => {
 			</p>
 			<Tiptap :namespace="localState.namespace" :user="localState.user" 
 			 :content="post.content"
+				:ref="el => { if (el) editorRefs[post.ref] = el }"
 				:id="post.ref"
-				@keyup.ctrl.space="handleKeyDownUpdate(post.ref)"
+				@keyup.ctrl.space="(e) => handleKeyDownUpdate(editorRefs[post.ref].editor as Editor)"
 			/>
 			</div>
 </div>
@@ -168,6 +167,7 @@ watch(focused, async (val) => {
 
 			<p class="text-gray-300 text-xs row center">{{ new Date(Number(post.ts)).toLocaleString() }}
 			</p>
+				<p class="text-gray-300 text-xs row center gap-2">By {{ post.user }}</p>
 			<Raw :content="post.content"  />
 </div>
 </div>
