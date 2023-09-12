@@ -71,6 +71,12 @@ const handleKeydown = async() => {
 		editor.chain().insertContent(text.value).run()			
 	}
 
+const handleKeyDownUpdate = async(id: string) => {
+		const content = document.getElementById(id)?.innerHTML as string
+		await complete(content)
+		document.getElementById(id)!.innerHTML = content + text.value
+	}
+
 
 const fetchAll = async () => {
 const { data } =  await useFetch("/api/blog", {
@@ -135,6 +141,7 @@ const updateContent = async (id: string) => {
 			<Tiptap :namespace="props.namespace" :user="props.user" 
 			 :content="post.content"
 				:id="post.ref"
+				@keyup.ctrl.space="handleKeyDownUpdate(post.ref)"
 			/>
 			</div>
 </div>
