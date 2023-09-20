@@ -27,10 +27,10 @@ watch(query, () => {
     >
     <Icon icon="logos:pypi" class="x3 m-2 scale invert"/>
   </a>
-  <RouterLink to="/doc" class="m-2 scale invert" 
+  <a href="https://docs.aiofauna.com" class="m-2 scale invert" 
     title="Documentation">
     <Icon icon="mdi-document" class="x3"/>
-  </RouterLink>
+  </a>
   <RouterLink to="/chat" class="m-2 scale invert"
     title="Demo Chat">
     <Icon icon="mdi-chat" class="x3"/>
